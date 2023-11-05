@@ -25,6 +25,14 @@ public class PayViaCoin {
         this.remainingAmountDue = totalAmountDue;
     }
     
+    public double getTotalAmountDue() {
+        return totalAmountDue;
+    }
+
+    public double getRemainingAmountDue() {
+        return remainingAmountDue;
+    }
+    
     public void processCoinPayment() {
         //Scanner scanner = new Scanner(System.in);
         
