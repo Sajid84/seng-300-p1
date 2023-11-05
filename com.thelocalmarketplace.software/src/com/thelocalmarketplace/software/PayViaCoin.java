@@ -1,83 +1,47 @@
 package com.thelocalmarketplace.software;
-
 import java.math.BigDecimal;
 
+import com.tdc.CashOverloadException;
+import com.tdc.DisabledException;
+import com.tdc.Sink;
 import com.tdc.coin.*;
-
-import java.util.Currency;
-
-
-//import java.util.Scanner;
+import com.thelocalmarketplace.hardware.SelfCheckoutStation;
 
 
-
-public class PayViaCoin {
-	//private BigDecimal Value;
-	//private Coin coin = new Coin(Value);
-	private double totalAmountDue;
-	private double remainingAmountDue;
-	private double coin;
+public abstract class PayViaCoin extends Cart implements Sink<Coin> {
 	
+	private BigDecimal remainingAmountDue;
+	private Coin coin;
+	private BigDecimal coinInserted;
 	
-	
-    public PayViaCoin(double totalAmountDue) {
-        this.totalAmountDue = totalAmountDue;
-        this.remainingAmountDue = totalAmountDue;
-    }
-    
-    public double getTotalAmountDue() {
-        return totalAmountDue;
-    }
+	public PayViaCoin(SelfCheckoutStation selfCheckoutStation) {
+		super(selfCheckoutStation);
+	}
 
-    public double getRemainingAmountDue() {
-        return remainingAmountDue;
+    public void PayViaCoin(BigDecimal cartTotal) {
+        this.remainingAmountDue = cartTotal;
     }
-    
-    public void processCoinPayment() {
-        //Scanner scanner = new Scanner(System.in);
-        
-        while (remainingAmountDue > 0) {
-            System.out.println("Remaining amount due: " + remainingAmountDue);
-            System.out.print("Insert coin value: ");
-            
-            if (coin <= 0) {
-                System.out.println("Invalid coin value. Please insert a valid coin.");
-                continue;
-            }
-            
-            // 2. Reduce the remaining amount due by the value of the inserted coin.
-            
-            remainingAmountDue -= coin;
-            
-            // 3. Signal the Customer the updated amount due after each insertion.
-            System.out.println("Amount due after insertion: " + remainingAmountDue);
-        }
-            
-        if (remainingAmountDue < 0) {
-            // 5. Dispense the change.
-            double change = -remainingAmountDue;
-            System.out.println("Change dispensed: " + change);
-        }
-
-        /*
-        // 6. Print Receipt
-        printReceipt();
-
       
+
+    public void processCoinPayment() throws DisabledException, CashOverloadException {
+    	
+    	
+    	while (remainingAmountDue.compareTo(BigDecimal.ZERO) > 0) {  		
+    		System.out.println("Please insert coin"); 
+    		
+    		receive(coin);   		
+    		coinInserted = coin.getValue();  
+    		
+    		remainingAmountDue = remainingAmountDue.subtract(coinInserted);
+    		System.out.println("Remaining amount due: " + remainingAmountDue);    		
+    	}
+    	
+    	if (remainingAmountDue.compareTo(BigDecimal.ZERO) < 0) {
+            //Dispense the amount of change due
+    		//Print Receipt
+    		//Both methods will be implemented in later versions of the program 
+        }
+    	
     }
 
-    public void printReceipt() {
-        System.out.println("Receipt printed successfully.");
-    }
-       */
-        
-    }
-    
-    public static void main(String[] args, double Coin) {
-        // Create an instance of the PayViaCoin with the total amount due.
-    	PayViaCoin payViaCoin = new PayViaCoin(Coin);
-
-        // Trigger the payment process.
-    	payViaCoin.processCoinPayment();
-    }
-} 
+}       
