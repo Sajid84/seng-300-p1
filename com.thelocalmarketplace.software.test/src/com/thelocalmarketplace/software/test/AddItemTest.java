@@ -25,9 +25,11 @@ import powerutility.PowerGrid;
 
 public class AddItemTest {
 
+	// Initializing a Self-Checkout Station instance and linking the AddItem software with it
 	SelfCheckoutStation selfCheckoutStation = new SelfCheckoutStation();
 	AddItem addItem = new AddItem(selfCheckoutStation);
-	
+
+	// Initializing a test product with its own barcode and mass
 	byte b = 2;
 	Numeral two = Numeral.valueOf(b);
 	Numeral[] barcodeNumbers = {two};
@@ -38,19 +40,23 @@ public class AddItemTest {
 	BarcodedProduct testProduct = new BarcodedProduct(barcode, "test", 1, 1);
 	
 	
-	
+	// Powering the Self-Checkout Station hardware and adding the test product into the database
 	@Before
 	public void setup() {
 		selfCheckoutStation.scanner.plugIn(PowerGrid.instance());
 		ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode, testProduct);
 	}
-	
+
+
+	// Tests the turnOn() and turnOff() listeners
 	@Test
 	public void testOnAndOffListeners() {
 		selfCheckoutStation.scanner.turnOn();
 		selfCheckoutStation.scanner.turnOff();
 	}
-	
+
+
+	// Tests the enable() and disable() listeners
 	@Test
 	public void testEnableDisableListeners() {
 		selfCheckoutStation.scanner.turnOn();
@@ -58,17 +64,22 @@ public class AddItemTest {
 		selfCheckoutStation.scanner.disable();
 		selfCheckoutStation.scanner.turnOff();
 	}
-	
+
+
+	// Tests the scanner listener for scanning an item that is within the database
 	@Test
 	public void testScannedItemInDatabaseListener() {
 		selfCheckoutStation.scanner.turnOn();
 		selfCheckoutStation.scanner.enable();
 		selfCheckoutStation.scanner.scan(testItem);
 	}
-	
+
+
+	// Tests the scanner listener for scanning an item that is not in the database
 	@Test
 	public void testScannedItemNotInDatabaseListener() {
-		
+
+		// Initializing a test product that is not in the database
 		byte c = 3;
 		Numeral three = Numeral.valueOf(c);
 		Numeral[] barcodeNumbers = {three};
