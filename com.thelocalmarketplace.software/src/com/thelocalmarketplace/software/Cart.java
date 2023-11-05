@@ -1,3 +1,13 @@
+/**
+ * Project Iteration 1 Group Members:
+ * Shaikh Sajid Mahmood	- 30182396
+ * Andrew Matti		- 30182547
+ * Christopher Lo	- 30113400
+ * Rahul Ghosal 	- 30171782
+ * Dana Al Bastami	- 30170494
+ * Atique Muhammad	- 30038650
+ */
+
 package com.thelocalmarketplace.software;
 
 import com.thelocalmarketplace.hardware.BarcodedProduct;
