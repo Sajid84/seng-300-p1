@@ -1,13 +1,3 @@
-/**
- * Project Iteration 1 Group Members:
- * Shaikh Sajid Mahmood	- 30182396
- * Andrew Matti		- 30182547
- * Christopher Lo	- 30113400
- * Rahul Ghosal 	- 30171782
- * Dana Al Bastami	- 30170494
- * Atique Muhammad	- 30038650
- */
-
 package com.thelocalmarketplace.software;
 import java.math.BigDecimal;
 
@@ -24,6 +14,8 @@ public class PayViaCoin extends Cart implements Sink<Coin> {
 	private BigDecimal coinInserted;
 	private Coin coin;
 	
+	public boolean paymentFinalized;
+	
 	public PayViaCoin(SelfCheckoutStation selfCheckoutStation) {
 		super(selfCheckoutStation);
 	}
@@ -33,6 +25,14 @@ public class PayViaCoin extends Cart implements Sink<Coin> {
         this.remainingAmountDue = cartTotal;
         return remainingAmountDue;
     }
+    
+    public boolean PaymentFinalized() {
+    	this.paymentFinalized = false;
+
+    	return paymentFinalized;
+    	
+    }
+    
       
     /**
 	 * Processes the payment from the customer with coins only
@@ -46,7 +46,7 @@ public class PayViaCoin extends Cart implements Sink<Coin> {
 	 *             to accept coins 
 	 */
     public void processCoinPayment() throws DisabledException, CashOverloadException {
-    	
+    	   	
     	
     	while (remainingAmountDue.compareTo(BigDecimal.ZERO) > 0) {  		
     		System.out.println("Please insert coin"); 
@@ -59,7 +59,11 @@ public class PayViaCoin extends Cart implements Sink<Coin> {
     		
     		//Present to the Customer the updated amount due
     		System.out.println("Remaining amount due: " + remainingAmountDue);    		
-    	}
+    	}	
+    	
+    }
+    
+    public boolean dispenseChange() {
     	
     	if (remainingAmountDue.compareTo(BigDecimal.ZERO) < 0) {
             //Dispense the amount of change due
@@ -67,7 +71,12 @@ public class PayViaCoin extends Cart implements Sink<Coin> {
     		//Both methods will be implemented in later versions of the program 
         }
     	
+    	this.paymentFinalized = true;
+    	
+    	return paymentFinalized;
+    		  	
     }
+
 
 	@Override
 	public void receive(Coin coin) throws CashOverloadException, DisabledException {
@@ -80,5 +89,5 @@ public class PayViaCoin extends Cart implements Sink<Coin> {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 }       
