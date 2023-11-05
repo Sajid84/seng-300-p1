@@ -44,7 +44,7 @@ public class AddItemTest {
 	@Before
 	public void setup() {
 		selfCheckoutStation.scanner.plugIn(PowerGrid.instance());
-		ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode, testProduct);
+		ProductDatabases.BARCODED_PRODUCT_DATABASE.put(barcode, testProduct); // Adding the test item into the database
 	}
 
 
