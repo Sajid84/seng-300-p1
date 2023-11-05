@@ -19,8 +19,9 @@ public class PayViaCoin extends Cart implements Sink<Coin> {
 	}
 
 	//sets the initial amount that is due by the customer 
-    public void setAmountDue(BigDecimal cartTotal) {
+    public BigDecimal setAmountDue(BigDecimal cartTotal) {
         this.remainingAmountDue = cartTotal;
+        return remainingAmountDue;
     }
       
     /**
@@ -59,7 +60,7 @@ public class PayViaCoin extends Cart implements Sink<Coin> {
     }
 
 	@Override
-	public void receive(Coin cash) throws CashOverloadException, DisabledException {
+	public void receive(Coin coin) throws CashOverloadException, DisabledException {
 		// TODO Auto-generated method stub
 		
 	}
