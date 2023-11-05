@@ -1,4 +1,4 @@
-package com.thelocalmarketplace.software;
+package com.thelocalmarketplace.software.test;
 
 import java.math.BigDecimal;
 
