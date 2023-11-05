@@ -33,7 +33,7 @@ public class WeightDiscrepancy {
         return false;
     }
 
-    private void blockMachine() {
+    public void blockMachine() {
         isBlocked = true;
     }
 
@@ -60,6 +60,14 @@ public class WeightDiscrepancy {
 
     public boolean isBlocked() {
         return isBlocked;
+    }
+
+    public double getExpectedWeight() {
+        return expectedWeight;
+    }
+
+    public double getActualWeight() {
+        return actualWeight;
     }
 
 }
