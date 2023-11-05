@@ -1,7 +1,5 @@
 package com.thelocalmarketplace.software;
 
-import com.thelocalmarketplace.hardware.SelfCheckoutStation;
-
 public class StartSession {
 private boolean isInSession;
     
@@ -11,6 +9,8 @@ private boolean isInSession;
 
     /**
      * Displays an initial splash screen with an indication to start.
+     *
+     * @return
      */
     public void displaySplashScreen() {
         if (!isInSession) {
