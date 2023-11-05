@@ -23,6 +23,8 @@ import ca.ucalgary.seng300.simulation.NullPointerSimulationException;
 
 public class CartTest {
 
+
+	// Initialize an instance of a Self-Checkout Station and linking it with a new instance of a Cart
 	SelfCheckoutStation selfCheckoutStation;
 	Cart cart = new Cart(selfCheckoutStation);
 	
