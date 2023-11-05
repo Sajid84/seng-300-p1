@@ -28,19 +28,20 @@ public class CartTest {
 	
 	BarcodedItem testItem;
 
+	// Checking if the SelfCheckoutStation correspond with what was initialized
 	@Test
 	public void testGetSelfCheckoutStation() {
 		SelfCheckoutStation testSelfCheckoutStation = cart.getSelfCheckoutStation();
 		assertEquals(selfCheckoutStation, testSelfCheckoutStation);
 	}
 	
-	
+	// Adding a type barcodedItem (null) into the cart
 	@Test
 	public void testAddToCart() {
 		cart.addToCart(testItem);
 	}
 	
-	
+	// Updating number of items in cart to 2
 	@Test
 	public void testUpdateNumberOfItems() {
 		cart.updateNumberOfItems(2);
@@ -50,7 +51,7 @@ public class CartTest {
 		assertEquals(expectedItems, items);
 	}
 	
-	
+	// Checking contents of a cart when empty
 	@Test
 	public void testGetEmptyCartContents() {
 		
@@ -58,7 +59,8 @@ public class CartTest {
 		ArrayList<BarcodedItem> items = cart.getCartContents();
 		assertEquals(listOfItems, items);
 	}
-	
+
+	// Checking contents of a cart with items
 	@Test
 	public void testGetCartContents() {
 		
