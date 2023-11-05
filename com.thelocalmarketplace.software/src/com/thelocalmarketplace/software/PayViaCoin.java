@@ -8,7 +8,7 @@ import com.tdc.coin.*;
 import com.thelocalmarketplace.hardware.SelfCheckoutStation;
 
 
-public abstract class PayViaCoin extends Cart implements Sink<Coin> {
+public class PayViaCoin extends Cart implements Sink<Coin> {
 	
 	private BigDecimal remainingAmountDue;
 	private BigDecimal coinInserted;
@@ -23,7 +23,7 @@ public abstract class PayViaCoin extends Cart implements Sink<Coin> {
         this.remainingAmountDue = cartTotal;
     }
       
-    	/**
+    /**
 	 * Processes the payment from the customer with coins only
 	 * After each insertion, calculates the amount remaining and presents the updated amount due
 	 * 
@@ -51,11 +51,23 @@ public abstract class PayViaCoin extends Cart implements Sink<Coin> {
     	}
     	
     	if (remainingAmountDue.compareTo(BigDecimal.ZERO) < 0) {
-            	//Dispense the amount of change due
+            //Dispense the amount of change due
     		//Print Receipt
     		//Both methods will be implemented in later versions of the program 
         }
     	
     }
+
+	@Override
+	public void receive(Coin cash) throws CashOverloadException, DisabledException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean hasSpace() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }       
